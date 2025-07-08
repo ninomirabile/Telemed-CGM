@@ -1,0 +1,133 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          
+      - name: Install dependencies
+        run: |
+          cd frontend && npm ci
+          cd ../backend && pip install -r requirements.txt
+          
+      - name: Build frontend
+        working-directory: frontend
+        run: npm run build
+        
+      - name: Run tests
+        run: |
+          cd frontend && npm run test:ci
+          cd ../backend && pytest --cov=app
+          
+      - name: Generate changelog
+        id: changelog
+        run: |
+          # Extract version from tag
+          VERSION=${GITHUB_REF#refs/tags/}
+          
+          # Generate changelog from commits
+          CHANGELOG=$(git log --pretty=format:"- %s" $(git describe --tags --abbrev=0 HEAD^)..HEAD)
+          
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "changelog<<EOF" >> $GITHUB_OUTPUT
+          echo "$CHANGELOG" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+          
+      - name: Create Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.changelog.outputs.version }}
+          release_name: Release ${{ steps.changelog.outputs.version }}
+          body: |
+            ## 🚀 Release ${{ steps.changelog.outputs.version }}
+            
+            ### 📋 Changes
+            ${{ steps.changelog.outputs.changelog }}
+            
+            ### 📦 Installation
+            ```bash
+            # Frontend
+            cd frontend && npm install
+            
+            # Backend
+            cd backend && pip install -r requirements.txt
+            ```
+            
+            ### 🔧 Configuration
+            - Copy `.env.example` to `.env`
+            - Update environment variables
+            - Run database migrations
+            
+            ### 🧪 Testing
+            ```bash
+            # Frontend
+            npm run test
+            npm run test:e2e
+            
+            # Backend
+            pytest
+            ```
+            
+            ### 📚 Documentation
+            - [User Guide](docs/user-guide.md)
+            - [API Reference](docs/api-reference.md)
+            - [Deployment Guide](docs/deployment.md)
+            
+            ---
+            
+            **Autore**: Antonino Mirabile  
+            **Licenza**: CC BY-NC 4.0
+          draft: false
+          prerelease: false
+          
+      - name: Upload frontend build
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./frontend/dist/
+          asset_name: frontend-${{ steps.changelog.outputs.version }}.zip
+          asset_content_type: application/zip
+          
+      - name: Notify team
+        if: success()
+        run: |
+          # Send notification to Slack/Discord/Teams
+          echo "Release ${{ steps.changelog.outputs.version }} created successfully!"
+          
+      - name: Update documentation
+        run: |
+          # Update version in documentation
+          sed -i "s/version: .*/version: ${{ steps.changelog.outputs.version }}/" docs/version.md
+          
+      - name: Commit documentation updates
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add docs/version.md
+          git commit -m "docs: update version to ${{ steps.changelog.outputs.version }}" || exit 0
+          git push 
