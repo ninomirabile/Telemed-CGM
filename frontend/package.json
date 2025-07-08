@@ -18,7 +18,7 @@
     "test:e2e:ui": "playwright test --ui",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css,md}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx,json,css,md}\"",
-    "prepare": "husky install",
+    "prepare": "if [ \"$CI\" != \"true\" ]; then husky install; fi",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "prepare:ci": "HUSKY=0 echo 'Husky disabled in CI'"

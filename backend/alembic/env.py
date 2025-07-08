@@ -7,8 +7,8 @@ from dotenv import load_dotenv
 
 # Import our models
 from app.models.base import Base
-from app.models.glucose import GlucoseReading
-from app.models.alert import Alert
+from app.models.glucose import GlucoseReading  # noqa: F401
+from app.models.alert import Alert  # noqa: F401
 
 # Load environment variables
 load_dotenv()
@@ -31,8 +31,12 @@ target_metadata = Base.metadata
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
 
+
 def get_url():
-    return os.getenv("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/telemed_cgm")
+    return os.getenv(
+        "DATABASE_URL",
+        "postgresql://postgres:postgres@localhost:5432/telemed_cgm"
+    )
 
 def run_migrations_offline() -> None:
     """Run migrations in 'offline' mode.
