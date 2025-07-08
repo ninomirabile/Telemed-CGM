@@ -18,7 +18,9 @@ jobs:
   deploy-staging:
     name: Deploy to Staging
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' || github.event.inputs.environment == 'staging'
+    if: |
+      (github.event_name == 'push' && github.ref == 'refs/heads/main') ||
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'staging')
     environment: staging
     
     steps:
@@ -64,11 +66,11 @@ jobs:
           pip install -r requirements.txt
           
       - name: Deploy backend to Railway
-        uses: bervProject/railway-deploy@v1.0.0
+        uses: bervProject/railway-deploy@main
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
         with:
-          railway_token: ${{ secrets.RAILWAY_TOKEN }}
           service: ${{ secrets.RAILWAY_SERVICE_ID }}
-          working_directory: backend
           
       - name: Run smoke tests
         run: |
@@ -82,8 +84,8 @@ jobs:
   deploy-production:
     name: Deploy to Production
     runs-on: ubuntu-latest
-    if: github.event.inputs.environment == 'production'
-    environment: production
+    if: |
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'production')
     needs: deploy-staging
     
     steps:
