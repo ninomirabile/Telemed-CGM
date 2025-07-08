@@ -1,6 +1,8 @@
 # 🏥 Telemed-CGM - Continuous Glucose Monitoring System
 
-[![CI](https://github.com/your-org/Telemed-CGM/actions/workflows/ci.yml/badge.svg)](https://github.com/your-org/Telemed-CGM/actions/workflows/ci.yml)
+[![CI](https://github.com/ninomirabile/Telemed-CGM/actions/workflows/ci.yml/badge.svg)](https://github.com/ninomirabile/Telemed-CGM/actions/workflows/ci.yml)
+[![Deploy](https://github.com/ninomirabile/Telemed-CGM/actions/workflows/deploy.yml/badge.svg)](https://github.com/ninomirabile/Telemed-CGM/actions/workflows/deploy.yml)
+[![Release](https://github.com/ninomirabile/Telemed-CGM/actions/workflows/release.yml/badge.svg)](https://github.com/ninomirabile/Telemed-CGM/actions/workflows/release.yml)
 [![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue.svg)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/React-18.0-blue.svg)](https://reactjs.org/)
@@ -208,9 +210,9 @@ Questo progetto è rilasciato sotto licenza **Creative Commons Attribution-NonCo
 
 ## 📞 Supporto
 
-- **Issues**: [GitHub Issues](https://github.com/your-org/Telemed-CGM/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/your-org/Telemed-CGM/discussions)
-- **Wiki**: [Project Wiki](https://github.com/your-org/Telemed-CGM/wiki)
+- **Issues**: [GitHub Issues](https://github.com/ninomirabile/Telemed-CGM/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/ninomirabile/Telemed-CGM/discussions)
+- **Wiki**: [Project Wiki](https://github.com/ninomirabile/Telemed-CGM/wiki)
 
 ## 🙏 Ringraziamenti
 

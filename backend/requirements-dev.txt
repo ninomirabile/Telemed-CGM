@@ -1,0 +1,6 @@
+pytest
+pytest-asyncio
+mypy
+black
+isort
+flake8 
