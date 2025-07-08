@@ -41,7 +41,9 @@ def upgrade() -> None:
         sa.ForeignKeyConstraint(['reading_id'], ['glucose_readings.id']),
         sa.PrimaryKeyConstraint('id')
     )
-    op.create_index(op.f('ix_alerts_id'), 'alerts', ['id'], unique=False)
+    op.create_index(
+        op.f('ix_alerts_id'), 'alerts', ['id'], unique=False
+    )
     # ### end Alembic commands ###
 
 
