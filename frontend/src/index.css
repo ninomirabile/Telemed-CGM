@@ -1,0 +1,216 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  
+  body {
+    @apply bg-neutral-50 text-neutral-900 antialiased;
+  }
+  
+  * {
+    @apply border-neutral-200;
+  }
+}
+
+@layer components {
+  /* Medical application specific components */
+  .medical-card {
+    @apply bg-white rounded-medical shadow-medical border border-neutral-200 p-6;
+  }
+  
+  .medical-card-header {
+    @apply border-b border-neutral-200 pb-4 mb-4;
+  }
+  
+  .medical-card-title {
+    @apply text-xl font-semibold text-neutral-900;
+  }
+  
+  .medical-card-subtitle {
+    @apply text-sm text-neutral-600 mt-1;
+  }
+  
+  .medical-button {
+    @apply inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-medical shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors duration-200;
+  }
+  
+  .medical-button-primary {
+    @apply medical-button bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500;
+  }
+  
+  .medical-button-secondary {
+    @apply medical-button bg-white text-neutral-700 border-neutral-300 hover:bg-neutral-50 focus:ring-primary-500;
+  }
+  
+  .medical-button-success {
+    @apply medical-button bg-success-600 text-white hover:bg-success-700 focus:ring-success-500;
+  }
+  
+  .medical-button-warning {
+    @apply medical-button bg-warning-600 text-white hover:bg-warning-700 focus:ring-warning-500;
+  }
+  
+  .medical-button-danger {
+    @apply medical-button bg-danger-600 text-white hover:bg-danger-700 focus:ring-danger-500;
+  }
+  
+  .medical-input {
+    @apply block w-full px-3 py-2 border border-neutral-300 rounded-medical shadow-sm placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 sm:text-sm;
+  }
+  
+  .medical-select {
+    @apply block w-full px-3 py-2 border border-neutral-300 rounded-medical shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 sm:text-sm;
+  }
+  
+  .medical-badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+  
+  .medical-badge-success {
+    @apply medical-badge bg-success-100 text-success-800;
+  }
+  
+  .medical-badge-warning {
+    @apply medical-badge bg-warning-100 text-warning-800;
+  }
+  
+  .medical-badge-danger {
+    @apply medical-badge bg-danger-100 text-danger-800;
+  }
+  
+  .medical-badge-info {
+    @apply medical-badge bg-primary-100 text-primary-800;
+  }
+  
+  /* Glucose reading specific styles */
+  .glucose-reading {
+    @apply medical-card;
+  }
+  
+  .glucose-value {
+    @apply text-4xl font-bold;
+  }
+  
+  .glucose-value-normal {
+    @apply glucose-value text-glucose-normal;
+  }
+  
+  .glucose-value-high {
+    @apply glucose-value text-glucose-high;
+  }
+  
+  .glucose-value-low {
+    @apply glucose-value text-glucose-low;
+  }
+  
+  .glucose-value-critical {
+    @apply glucose-value text-glucose-critical;
+  }
+  
+  /* Alert styles */
+  .alert-item {
+    @apply p-4 border-l-4 rounded-r-medical mb-3;
+  }
+  
+  .alert-info {
+    @apply alert-item bg-primary-50 border-primary-400 text-primary-800;
+  }
+  
+  .alert-warning {
+    @apply alert-item bg-warning-50 border-warning-400 text-warning-800;
+  }
+  
+  .alert-error {
+    @apply alert-item bg-danger-50 border-danger-400 text-danger-800;
+  }
+  
+  .alert-success {
+    @apply alert-item bg-success-50 border-success-400 text-success-800;
+  }
+  
+  /* Chart container */
+  .chart-container {
+    @apply medical-card;
+  }
+  
+  .chart-title {
+    @apply medical-card-title mb-4;
+  }
+  
+  /* Loading states */
+  .loading-skeleton {
+    @apply animate-pulse bg-neutral-200 rounded;
+  }
+  
+  /* Responsive utilities */
+  .medical-grid {
+    @apply grid gap-6;
+  }
+  
+  .medical-grid-cols-1 {
+    @apply medical-grid grid-cols-1;
+  }
+  
+  .medical-grid-cols-2 {
+    @apply medical-grid grid-cols-1 md:grid-cols-2;
+  }
+  
+  .medical-grid-cols-3 {
+    @apply medical-grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3;
+  }
+  
+  .medical-grid-cols-4 {
+    @apply medical-grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4;
+  }
+}
+
+@layer utilities {
+  /* Custom utilities for medical application */
+  .text-medical {
+    @apply text-neutral-900;
+  }
+  
+  .bg-medical {
+    @apply bg-white;
+  }
+  
+  .border-medical {
+    @apply border-neutral-200;
+  }
+  
+  /* Accessibility utilities */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  
+  /* Focus utilities */
+  .focus-visible {
+    @apply focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2;
+  }
+  
+  /* Print utilities */
+  @media print {
+    .no-print {
+      display: none !important;
+    }
+    
+    .print-only {
+      display: block !important;
+    }
+  }
+}
