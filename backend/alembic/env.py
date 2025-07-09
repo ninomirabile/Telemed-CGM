@@ -1,14 +1,15 @@
-from logging.config import fileConfig
 import os
-from sqlalchemy import engine_from_config
-from sqlalchemy import pool
-from alembic import context
+from logging.config import fileConfig
+
 from dotenv import load_dotenv
+from sqlalchemy import engine_from_config, pool
+
+from alembic import context
+from app.models.alert import Alert  # noqa: F401
 
 # Import our models
 from app.models.base import Base
 from app.models.glucose import GlucoseReading  # noqa: F401
-from app.models.alert import Alert  # noqa: F401
 
 # Load environment variables
 load_dotenv()
@@ -34,9 +35,9 @@ target_metadata = Base.metadata
 
 def get_url():
     return os.getenv(
-        "DATABASE_URL",
-        "postgresql://postgres:postgres@localhost:5432/telemed_cgm"
+        "DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/telemed_cgm"
     )
+
 
 def run_migrations_offline() -> None:
     """Run migrations in 'offline' mode.
@@ -78,9 +79,7 @@ def run_migrations_online() -> None:
     )
 
     with connectable.connect() as connection:
-        context.configure(
-            connection=connection, target_metadata=target_metadata
-        )
+        context.configure(connection=connection, target_metadata=target_metadata)
 
         with context.begin_transaction():
             context.run_migrations()
