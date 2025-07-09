@@ -70,7 +70,6 @@ def run_migrations_online() -> None:
     and associate a connection with the context.
 
     """
-    from typing import Any, Dict
     configuration = config.get_section(config.config_ini_section)
     if configuration is None:
         raise RuntimeError("Alembic config section not found")
