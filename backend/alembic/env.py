@@ -70,10 +70,13 @@ def run_migrations_online() -> None:
     and associate a connection with the context.
 
     """
+    from typing import Any, Dict
     configuration = config.get_section(config.config_ini_section)
+    if configuration is None:
+        raise RuntimeError("Alembic config section not found")
     configuration["sqlalchemy.url"] = get_url()
     connectable = engine_from_config(
-        configuration,
+        configuration,  # type: ignore[arg-type]
         prefix="sqlalchemy.",
         poolclass=pool.NullPool,
     )
