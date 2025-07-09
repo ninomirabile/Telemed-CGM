@@ -23,7 +23,7 @@ def get_active_alerts(db: Session):
 def mark_alert_as_read(db: Session, alert_id: int):
     alert = db.query(Alert).filter(Alert.id == alert_id).first()
     if alert:
-        alert.is_active = False
+        alert.is_active = False  # type: ignore
         db.commit()
         return alert
     return None
