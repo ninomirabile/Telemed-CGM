@@ -109,9 +109,9 @@ jobs:
           
       - name: Check code style
         run: |
-          flake8 .
-          black --check . || true
-          isort --check-only .
+          flake8 --config=backend/.flake8 backend
+          black --check backend || true
+          isort --check-only backend
           
       - name: Type check
         working-directory: backend

@@ -2,6 +2,23 @@
 
 Backend FastAPI per il sistema di telemonitoraggio glicemico continuo (CGM).
 
+## ⚙️ Note su Linting e CI/CD
+
+- Le regole di linting Python (flake8) sono state rilassate per facilitare lo sviluppo:
+  - La lunghezza massima delle righe è ora 120 caratteri.
+  - Gli errori E501 (linea troppo lunga) e W291 (spazi finali) sono ignorati (vedi file `.flake8`).
+- Il check di formattazione Black non blocca più il workflow in caso di file non formattati (vedi `.github/workflows/ci.yml`).
+
+## 🚀 Deploy Railway (opzionale)
+
+- Il deploy automatico su Railway è opzionale.
+- Se non hai un account Railway o non vuoi usare questo servizio, puoi ignorare o commentare lo step relativo nel workflow di deploy.
+- Per abilitare il deploy su Railway:
+  1. Crea un account su https://railway.app/
+  2. Crea un progetto e un servizio.
+  3. Imposta i secrets `RAILWAY_TOKEN` e `RAILWAY_SERVICE_ID` su GitHub.
+  4. Riattiva lo step nel file `.github/workflows/deploy.yml`.
+
 ## 🚀 Stack
 - FastAPI
 - SQLAlchemy (PostgreSQL)
