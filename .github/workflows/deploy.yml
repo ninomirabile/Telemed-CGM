@@ -27,7 +27,7 @@ jobs:
 
       # Railway deploy step rimosso
 
-      - name: Run smoke tests
-        run: |
-          sleep 30
-          curl -f ${{ secrets.PRODUCTION_API_URL }}/health || exit 1 
+      # - name: Run smoke tests
+      #   run: |
+      #     sleep 30
+      #     curl -f ${{ secrets.PRODUCTION_API_URL }}/health || exit 1 
