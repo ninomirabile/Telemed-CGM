@@ -1,6 +1,6 @@
 import random
 from datetime import datetime
-from typing import cast, Literal
+from typing import Literal, cast
 
 from sqlalchemy.orm import Session
 
@@ -34,7 +34,7 @@ def generate_mock_glucose_reading() -> GlucoseReadingCreate:
     value = random.uniform(70, 300)
     trend = cast(
         Literal["rising", "falling", "stable", "rising_rapidly", "falling_rapidly"],
-        random.choice(trends)
+        random.choice(trends),
     )
 
     return GlucoseReadingCreate(
