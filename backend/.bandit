@@ -1,0 +1,3 @@
+exclude_dirs: ["tests", "venv", ".venv", "migrations", "alembic"]
+skips: ["B101", "B601"]
+targets: ["app"] 

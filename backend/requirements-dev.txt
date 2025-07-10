@@ -5,4 +5,6 @@ mypy
 black
 isort
 flake8
-PyYAML 
+PyYAML
+bandit
+safety 
