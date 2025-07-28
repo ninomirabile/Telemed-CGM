@@ -66,7 +66,7 @@ Telemed-CGM/
 
 1. **Clone del repository**
    ```bash
-   git clone https://github.com/your-org/Telemed-CGM.git
+   git clone https://github.com/ninomirabile/Telemed-CGM.git
    cd Telemed-CGM
    ```
 
